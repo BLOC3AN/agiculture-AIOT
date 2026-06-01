@@ -47,25 +47,14 @@ class Preprocessor:
             ])
             
             # Auto-calculate/fallback for total_days if missing or null based on crop type
-            crop_cycle_mapping = {
-                "Wheat": 120.0,
-                "Soybean": 120.0,
-                "Cotton": 120.0,
-                "Rice": 120.0,
-                "Maize": 120.0,
-                "Tomato": 75.0,
-                "Pepper": 85.0,
-                "Lettuce": 40.0,
-                "Cucumber": 60.0
-            }
             if "total_days" not in df_processed.columns:
                 df_processed = df_processed.with_columns([
-                    pl.col("crop_type").replace(crop_cycle_mapping, default=100.0).cast(pl.Float64).alias("total_days")
+                    pl.col("crop_type").replace(Config.CROP_CYCLE_MAPPING, default=100.0).cast(pl.Float64).alias("total_days")
                 ])
             else:
                 df_processed = df_processed.with_columns([
                     pl.col("total_days").fill_null(
-                        pl.col("crop_type").replace(crop_cycle_mapping, default=100.0).cast(pl.Float64)
+                        pl.col("crop_type").replace(Config.CROP_CYCLE_MAPPING, default=100.0).cast(pl.Float64)
                     )
                 ])
             

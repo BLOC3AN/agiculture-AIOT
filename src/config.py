@@ -1,4 +1,5 @@
 import os
+import json
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -21,6 +22,10 @@ class Config:
     # Machine Learning Parameters
     RANDOM_STATE = int(os.getenv("RANDOM_STATE", "42"))
     TEST_SIZE = float(os.getenv("TEST_SIZE", "0.2"))
+
+    # Crop Cycle Mapping Config
+    _DEFAULT_MAPPING = '{"Wheat": 120.0, "Soybean": 120.0, "Cotton": 120.0, "Rice": 120.0, "Maize": 120.0, "Tomato": 75.0, "Pepper": 85.0, "Lettuce": 40.0, "Cucumber": 60.0}'
+    CROP_CYCLE_MAPPING = json.loads(os.getenv("CROP_CYCLE_MAPPING", _DEFAULT_MAPPING))
 
     @classmethod
     def get_data_absolute_path(cls) -> Path:

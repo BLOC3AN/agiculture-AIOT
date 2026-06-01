@@ -163,7 +163,7 @@ if __name__ == "__main__":
     try:
         pipeline = AgricultureAIoTPipeline()
         test_reading = {
-            "crop_type": "Wheat",
+            "crop_type": "Tomato",
             "soil_moisture_%": 18.5,
             "soil_pH": 5.8,
             "temperature_C": 28.0,
@@ -171,7 +171,6 @@ if __name__ == "__main__":
             "rainfall_mm": 5.0,
             "sowing_date": "2024-01-08",
             "timestamp": "2024-03-19",
-            "total_days": 120,
             "NDVI_index": 0.65,
             "crop_disease_status": "None"
         }
